@@ -1,68 +1,82 @@
 package com.example.summervacationhomework.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Sight {
-    private String SightName;
-    private String Zone;
-    private String Category;
-    private String PhotoURL;
-    private String Description;
-    private String Address;
+    @Id
+    private String id;
+    private String sightName;
+    private String zone;
+    private String category;
+    private String photoURL;
+    private String description;
+    private String address;
 
     public String getSightName() {
-        return SightName;
+        return sightName;
     }
 
     public void setSightName(String sightName) {
-        SightName = sightName;
+        this.sightName = sightName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getZone() {
-        return Zone;
+        return zone;
     }
 
     public void setZone(String zone) {
-        Zone = zone;
+        this.zone = zone;
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.category = category;
     }
 
     public String getPhotoURL() {
-        return PhotoURL;
+        return photoURL;
     }
 
     public void setPhotoURL(String photoURL) {
-        PhotoURL = photoURL;
+        this.photoURL = photoURL;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     @Override
     public String toString() {
-        return "SightName: "+SightName+"\n"
-                +"Zone: "+Zone+"\n"
-                +"Category: "+ Category+"\n"
-                +"PhotoURL: "+PhotoURL+"\n"
-                +"Description: "+Description+"\n"
-                +"Address: "+Address+"\n\n";
+        return "SightName: "+sightName+"\n"
+                +"Zone: "+zone+"\n"
+                +"Category: "+ category+"\n"
+                +"PhotoURL: "+photoURL+"\n"
+                +"Description: "+description+"\n"
+                +"Address: "+address+"\n\n";
     }
 }
