@@ -18,13 +18,25 @@
 				max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
 				height:auto;
 			}
+			#o_card{
+				width:100%;
+				display: flex;
+			}
+			#result{
+				width:100%;
+				display: flex;
+				flex-wrap: wrap;
+				flex-flow: row wrap;
+				flex-direction: column;
+				align-items:stretch;
+			}
 		}
 		#result{
-			display: flex;
-			flex-wrap: wrap;
-			flex-flow: row wrap;
-			flex-direction: column;
-			align-items:stretch;
+			width:100%;
+		}
+		#o_card{
+			width:30%;
+			display: inline-block;
 		}
 		img{
 			max-width:100%; /*不使用width:100% 是因避免圖片解析度不好，隨父元素被放大時會糊掉*/
@@ -48,7 +60,7 @@
 	<button type="button" class="btn btn-outline-warning btn-lg" id="zone"><b>暖暖區</b></button>
 </div>
 <div class="container" id="result_display">
-	<div id = "result" style="display: inline-block; width:100%"></div>
+	<div id = "result"></div>
 </div>
 </body>
 </html>

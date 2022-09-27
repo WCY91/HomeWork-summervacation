@@ -10,7 +10,7 @@ $(document).ready(function() {
               $.each(allSights,function (i,sight){
                   let address = "https://www.google.com.tw/maps/place/"+sight.address;
                   results.append(
-                        "<div class='card' style='width:30%;display: inline-block'>" +
+                        "<div class='card' id = o_card>" +
                             "<div class='card-header'>"+sight.sightName+"</div>" +
                             "<div class='card-body bg-dark text-white'>" +
                                 "<p>"+"區域:"+sight.zone+"<br>"+"分類:"+sight.category +
