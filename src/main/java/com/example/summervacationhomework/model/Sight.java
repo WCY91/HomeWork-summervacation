@@ -5,8 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Sight {
-    @Id
-    private String id;
+
     private String sightName;
     private String zone;
     private String category;
@@ -22,13 +21,7 @@ public class Sight {
         this.sightName = sightName;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getZone() {
         return zone;

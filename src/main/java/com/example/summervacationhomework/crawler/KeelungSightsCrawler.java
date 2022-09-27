@@ -1,5 +1,4 @@
 package com.example.summervacationhomework.crawler;
-import com.example.summervacationhomework.dao.SightRepo;
 import com.example.summervacationhomework.model.Sight;
 
 import org.jsoup.Jsoup;
@@ -8,7 +7,7 @@ import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 import java.io.*;
@@ -26,14 +25,7 @@ public class KeelungSightsCrawler {
         return sightList;
     }
 
-    @Autowired
-    private SightRepo sightRepo ;
 
-
-    public void createSight(Sight request) {
-        if(sightRepo==null) System.out.println("error");
-        sightRepo.insert(request);
-    }
     public KeelungSightsCrawler(){
         try {
             num = 0;
@@ -50,7 +42,7 @@ public class KeelungSightsCrawler {
                 targetUrl[numUrl] = link.attr("abs:href");
                 numUrl++;
             }
-            for(int n=0;n<numUrl;n++){
+            for(int n=0;n<numUrl;n++) {
                 //進入想要的目標區域
                 Document nextDoc = Jsoup.connect(targetUrl[n]).get();
 
@@ -58,10 +50,10 @@ public class KeelungSightsCrawler {
                 Elements sightLinks = nextDoc.getElementsByClass("box");
                 Elements body = sightLinks.select("ul");
                 Elements urlBody = body.select("a[href]");
-                for (Element link :  urlBody) {
+                for (Element link : urlBody) {
                     sightarray.add(link.attr("abs:href"));
                 }
-
+            }
                 //遍布每個景點連結並取得需要的屬性
                 for(int i = 0; i < sightarray.size(); i++) {
 
@@ -73,7 +65,8 @@ public class KeelungSightsCrawler {
                     Elements sightTitle = sightDoc.getElementsByClass("h1");
                     temp.setSightName(sightTitle.attr("property","dc:title").text());
 
-                    temp.setZone(targetZoneName[n]);
+
+
 
                     Elements sightCategory = sightDoc.getElementsByClass("point_type");
                     temp.setCategory(sightCategory.attr("property","rdfs:label").text().substring(6));
@@ -104,44 +97,15 @@ public class KeelungSightsCrawler {
                     Elements sightAddress = sightDoc.getElementsByClass("address");
                     temp.setAddress(sightAddress.attr("property","vcard:street-address").text().substring(4));
 
+                    temp.setZone(temp.getAddress().substring(3,6));
                     sightList.add(temp);
                 }
-            }
+
         } catch (IOException e) {
             System.out.printf(e.getMessage());
         }
 
     }
-   /* public Sight[] getItems(String zone) {
-        List<Sight> sightListForZone = new ArrayList();
-        for (int k = 0; k < sightList.size(); k++) {
-            if (sightList.get(k).getZone().equals(zone)) {
-                sightListForZone.add(sightList.get(k));
-            }
-        }
-        if (sightListForZone.size() == 0) return null;
-        else {
-            Sight[] tempArray = new Sight[sightListForZone.size()];
-            for (int i = 0; i < sightListForZone.size(); i++) {
-                tempArray[i] = sightListForZone.get(i);
-            }
 
-            return tempArray;
-        }
-    }*/
-
-    /*public static void main(String[] args) throws Exception {
-        KeelungSightsCrawler crawler = new KeelungSightsCrawler();
-        SightService service = new SightService();
-        Sight[] tmp = crawler.getItems("中正區");
-        if(tmp == null){
-            System.out.println("Wrong zone");
-        }
-        else {
-            for (Sight temp : tmp) {
-                System.out.println(temp);
-            }
-        }
-    }*/
 
 }
